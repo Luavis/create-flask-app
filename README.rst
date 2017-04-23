@@ -1,3 +1,5 @@
+|wip| |pypi| |pypi-version| |travis-ci| |Code Climate| |Test Coverage| |Open Source Love|
+
 Create flask app
 -------------------
 
@@ -7,8 +9,11 @@ Create flask web apps with directory layout
 Install
 -------
 
+You can install `create-flask-app` with pip
 ::
+
     $ pip install create-flask-app
+
 
 Usage
 -----
@@ -25,3 +30,15 @@ Usage
     optional arguments:
       -h, --help           show this help message and exit
 
+License
+-------
+
+- MIT © 2017 `Luavis <https://github.com/Luavis>`__
+
+.. |wip| image:: https://img.shields.io/badge/status-WIP-red.svg
+.. |pypi| image:: https://img.shields.io/pypi/v/sherlock.py.svg
+   :target: https://pypi.python.org/pypi/create-flask-app
+.. |pypi-version| image:: https://img.shields.io/pypi/pyversions/sherlock.py.svg
+   :target: https://pypi.python.org/pypi/create-flask-app
+.. |Open Source Love| image:: https://badges.frapsoft.com/os/mit/mit.svg?v=102
+   :target: https://github.com/luavis/sherlock/
