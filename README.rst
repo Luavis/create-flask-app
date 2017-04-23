@@ -1,4 +1,4 @@
-|wip| |pypi| |pypi-version| |travis-ci| |Code Climate| |Test Coverage| |Open Source Love|
+|wip| |pypi| |pypi-version| |Open Source Love|
 
 Create flask app
 -------------------
