@@ -38,7 +38,7 @@ License
 .. |wip| image:: https://img.shields.io/badge/status-WIP-red.svg
 .. |pypi| image:: https://img.shields.io/pypi/v/sherlock.py.svg
    :target: https://pypi.python.org/pypi/create-flask-app
-.. |pypi-version| image:: https://img.shields.io/pypi/pyversions/sherlock.py.svg
+.. |pypi-version| image:: https://img.shields.io/pypi/pyversions/create-flask-app.svg
    :target: https://pypi.python.org/pypi/create-flask-app
 .. |Open Source Love| image:: https://badges.frapsoft.com/os/mit/mit.svg?v=102
    :target: https://github.com/luavis/sherlock/
