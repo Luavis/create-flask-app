@@ -115,6 +115,9 @@ class CreateApp():
             os.makedirs(dstroot)
 
         for file in files:
+            if file == '.keep':
+                # Ignore keep file
+                continue
             srcfile = path.join(srcroot, file)
             dstfile = path.join(dstroot, file)
             _, ext = path.splitext(dstfile)
