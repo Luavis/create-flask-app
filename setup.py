@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import create_flask_app
 from setuptools import setup, find_packages
 
 
@@ -9,10 +10,10 @@ def install():
 
     setup(
         name='create-flask-app',
-        version='0.1.0',
+        version=create_flask_app.__version__,
         description='Create flask web apps with directory layout',
         long_description=readme,
-        author='Luavis',
+        author=create_flask_app.__author__,
         author_email='me@luav.is',
         license='MIT',
         platforms=['POSIX'],
@@ -30,9 +31,10 @@ def install():
             'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',],
         entry_points={'console_scripts': [
-            'create-flask-app = scripts:main',
+            'create-flask-app = create_flask_app:main',
         ]},
-        packages=find_packages(exclude=('tests', )),
+        packages=find_packages(exclude=('create_flask_app.template', )),
+        include_package_data=True,
         install_requires=[
             'virtualenv==15.1.0',
         ],

@@ -3,18 +3,24 @@ import os
 import sys
 import shutil
 import argparse
-import virtualenv
 from os import path, getcwd
 from datetime import datetime
 
-SRC_TEMPLATES_DIR = 'templates'
+
+__author__ = 'Luavis'
+__version__ = '0.1.6'
+
+SRC_TEMPLATES_DIR = 'template'
 ERR_EXISTS = """The directory %s contains files that could conflict.
 Try using a new directory name."""
-CONVERT_TARGET = ['.py', '.rst']
+CONVERT_TARGET = ['.pyt', '.rst']
+IGNORE_TARGET = ['.pyc', '.keep']
+IGNORE_DIRECTORY = ['__pycache__']
 CONVERT_FORMAT = '${{ %s }}'
 TERM_COLOR_GREEN = '\033[92m'
 TERM_COLOR_CYAN ='\033[36m'
 TERM_COLOR_ENDC = '\033[0m'
+
 
 class CreateApp():
 
@@ -96,9 +102,14 @@ class CreateApp():
             print('PYTHONHOME is set.  You *must* activate the virtualenv before using it')
             del os.environ['PYTHONHOME']
 
-        virtualenv.create_environment(path.join(self.dest, 'venv'))
+        __import__('virtualenv').create_environment(path.join(self.dest, 'venv'))
 
     def convert_config(self, srcfile, dstfile):
+        dstname, ext = path.splitext(dstfile)
+
+        # convert .pyt -> .py
+        if ext == '.pyt':
+            dstfile = dstname + '.py'
         dst = open(dstfile, 'w')
 
         with open(srcfile, 'r') as f:
@@ -115,12 +126,13 @@ class CreateApp():
             os.makedirs(dstroot)
 
         for file in files:
-            if file == '.keep':
-                # Ignore keep file
-                continue
             srcfile = path.join(srcroot, file)
             dstfile = path.join(dstroot, file)
-            _, ext = path.splitext(dstfile)
+            _, ext = path.splitext(srcfile)
+
+            # ignore target
+            if ext in IGNORE_TARGET:
+                continue
 
             if ext in CONVERT_TARGET:
                 self.convert_config(srcfile, dstfile)
@@ -131,6 +143,9 @@ class CreateApp():
         for root, dirs, files in os.walk(self.src):
             # replace src path to dst
             dstroot = root.replace(self.src, self.dest, 1)
+            # ignore directory
+            if path.basename(path.normpath(root)) in IGNORE_DIRECTORY:
+                continue
             self.walkfiles(root, dstroot, files)
 
 
@@ -138,9 +153,11 @@ def main():
     parser = argparse.ArgumentParser(description='create flask application')
     parser.add_argument('project', metavar='<project-directory>', type=str,
                         help='directory')
+    parser.add_argument('--version', action='version',
+                    version='%(prog)s {version}'.format(version=__version__))
 
     args = parser.parse_args()
-    src = path.join(path.dirname(path.abspath(__file__)), '..', SRC_TEMPLATES_DIR)
+    src = path.join(path.dirname(path.abspath(__file__)), SRC_TEMPLATES_DIR)
     src = path.abspath(src)
     dest = path.join(getcwd(), args.project)
 

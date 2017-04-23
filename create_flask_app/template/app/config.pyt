@@ -7,7 +7,6 @@ class Config(object):
         path.dirname(path.join(__file__ + '..'))
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///%s/test.db' % (ROOT_DIR)
     SECRET_KEY=${{ SECRET_KEY }}
 
