@@ -159,6 +159,10 @@ def main():
     args = parser.parse_args()
     src = path.join(path.dirname(path.abspath(__file__)), SRC_TEMPLATES_DIR)
     src = path.abspath(src)
+    if not args.project.isalnum():
+        print('ERROR: project name must be alpha-numeric')
+        sys.exit(1)
+
     dest = path.join(getcwd(), args.project)
 
     capp = CreateApp(src, dest, args.project)
