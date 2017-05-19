@@ -22,6 +22,11 @@ TERM_COLOR_CYAN ='\033[36m'
 TERM_COLOR_ENDC = '\033[0m'
 
 
+def rreplace(s, old, new, occurrence):
+    li = s.rsplit(old, occurrence)
+    return new.join(li)
+
+
 class CreateApp():
 
     def __init__(self, src, dest, project):
@@ -38,12 +43,14 @@ class CreateApp():
             'AUTHOR': os.getlogin(),
             'LICENSE': 'MIT',
             'VERSION': '0.1.0',
-            'SECRET_KEY': str(os.urandom(24)),
+            'SECRET_KEY': "".join(
+                ["\\x%02x" % ord(c) for c in str(os.urandom(24))
+            ]),
             'YEAR': str(datetime.now().year),
         }
 
     def create(self):
-        print('Creating a new React app in %s' % self.dest)
+        print('Creating a new Flask app in %s' % self.dest)
         self.walkdir()
         self.create_venv()
         self.print_complete()
@@ -143,6 +150,7 @@ class CreateApp():
         for root, dirs, files in os.walk(self.src):
             # replace src path to dst
             dstroot = root.replace(self.src, self.dest, 1)
+            dstroot = rreplace(dstroot, '__PROJECT_NAME__', self.project, 1)
             # ignore directory
             if path.basename(path.normpath(root)) in IGNORE_DIRECTORY:
                 continue

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import app
+import ${{ PROJECT_NAME }}
 from setuptools import setup, find_packages
 
 
@@ -10,11 +10,10 @@ def install():
 
     setup(
         name='${{ PROJECT_NAME }}',
-        version=app.__version__,
+        version=${{ PROJECT_NAME }}.__version__,
         description='${{ PROJECT_NAME }} website project',
         long_description=readme,
-        author=app.__author__,
-        author_email=app.__email__,
+        author=${{ PROJECT_NAME }}.__author__,
         license='MIT',
         platforms=['POSIX'],
         classifiers=[

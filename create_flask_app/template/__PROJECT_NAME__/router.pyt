@@ -1,4 +1,4 @@
-from app import app
+from ${{ PROJECT_NAME }} import app
 
 @app.route('/')
 def index():

@@ -1,14 +1,15 @@
+# -*- coding: utf-8 -*-
 from os import path
 
 class Config(object):
     DEBUG = False
     TESTING = False
     ROOT_DIR = path.abspath(
-        path.dirname(path.join(__file__ + '..'))
+        path.dirname(path.join(__file__))
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///%s/test.db' % (ROOT_DIR)
-    SECRET_KEY=${{ SECRET_KEY }}
+    SECRET_KEY='${{ SECRET_KEY }}'
 
 class DevelopmentConfig(Config):
     DEBUG = True
