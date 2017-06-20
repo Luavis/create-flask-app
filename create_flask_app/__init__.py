@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 __author__ = 'Luavis'
-__version__ = '0.1.6'
+__version__ = '0.1.7'
 
 SRC_TEMPLATES_DIR = 'template'
 ERR_EXISTS = """The directory %s contains files that could conflict.
@@ -159,16 +159,16 @@ class CreateApp():
 
 def main():
     parser = argparse.ArgumentParser(description='create flask application')
-    parser.add_argument('project', metavar='<project-directory>', type=str,
-                        help='directory')
+    parser.add_argument('project', metavar='<project name>', type=str,
+                        help='project name what you want')
     parser.add_argument('--version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
 
     args = parser.parse_args()
     src = path.join(path.dirname(path.abspath(__file__)), SRC_TEMPLATES_DIR)
     src = path.abspath(src)
-    if not args.project.isalnum():
-        print('ERROR: project name must be alpha-numeric')
+    if not args.project.replace('_', '').isalnum():
+        print('ERROR: please enter project name what you want and project name must be alphanumeric')
         sys.exit(1)
 
     dest = path.join(getcwd(), args.project)
