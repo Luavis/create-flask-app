@@ -35,9 +35,7 @@ def install():
         ]},
         packages=find_packages(exclude=('create_flask_app.template', )),
         include_package_data=True,
-        install_requires=[
-            'virtualenv==15.1.0',
-        ],
+        install_requires=[],
     )
 
 if __name__ == "__main__":
