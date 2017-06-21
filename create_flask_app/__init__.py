@@ -14,7 +14,7 @@ SRC_TEMPLATES_DIR = 'template'
 ERR_EXISTS = """The directory %s contains files that could conflict.
 Try using a new directory name."""
 CONVERT_TARGET = ['.pyt', '.rst']
-IGNORE_TARGET = ['.pyc', '.keep']
+IGNORE_TARGET = ['.pyc']
 IGNORE_DIRECTORY = ['__pycache__']
 CONVERT_FORMAT = '${{ %s }}'
 TERM_COLOR_GREEN = '\033[92m'
@@ -52,7 +52,6 @@ class CreateApp():
     def create(self):
         print('Creating a new Flask app in %s' % self.dest)
         self.walkdir()
-        self.create_venv()
         self.print_complete()
 
     def print_complete(self):
@@ -82,9 +81,8 @@ class CreateApp():
 
         print(
             ('\n{green}Success!{endc} Created {project} at {dest}\n' +
-            'First you have to install dependencies with virtualenv:\n\n' +
+            'First you have to install dependencies:\n\n' +
             '{cyan}${endc} cd {dest}\n' +
-            '{cyan}${endc} cd ./venv/bin/activate\n' +
             '{cyan}${endc} pip install -r ./requirements.txt\n\n' +
             'Then you can run several commands:\n\n' +
             '{command_helps}\n' +
@@ -137,8 +135,8 @@ class CreateApp():
             dstfile = path.join(dstroot, file)
             _, ext = path.splitext(srcfile)
 
-            # ignore target
-            if ext in IGNORE_TARGET:
+            # ignore target and .keep file
+            if ext in IGNORE_TARGET or ext == '':
                 continue
 
             if ext in CONVERT_TARGET:

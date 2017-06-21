@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-import os
-from ${{ PROJECT_NAME }} import main
+from ${{ PROJECT_NAME }} import app, main
 
 
 if __name__ == "__main__":
-    main()
+    main(app)
